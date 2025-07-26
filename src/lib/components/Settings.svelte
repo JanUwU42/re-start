@@ -68,14 +68,6 @@
                 </div>
             </div>
             <div class="group">
-                <label for="todoist-token">todoist api token</label>
-                <input
-                    id="todoist-token"
-                    type="password"
-                    bind:value={settings.todoistApiToken}
-                />
-            </div>
-            <div class="group">
                 <label for="latitude">latitude</label>
                 <input
                     id="latitude"
@@ -111,27 +103,6 @@
                             value="celsius"
                         />
                         celsius
-                    </label>
-                </div>
-            </div>
-            <div class="group">
-                <div class="setting-label">speed format</div>
-                <div class="radio-group">
-                    <label class="radio-label">
-                        <input
-                            type="radio"
-                            bind:group={settings.speedUnit}
-                            value="mph"
-                        />
-                        mph
-                    </label>
-                    <label class="radio-label">
-                        <input
-                            type="radio"
-                            bind:group={settings.speedUnit}
-                            value="kmh"
-                        />
-                        kmh
                     </label>
                 </div>
             </div>
@@ -174,15 +145,13 @@
                     {/each}
                 </div>
             </div>
-            <div class="version">
-                re-start
-                {#if version}v{version}
-                {/if} • made with ❤️ by
+            <div class="credits">
+                made with ❤️ by
                 <a href="https://refact0r.dev" target="_blank">refact0r</a>
+                • modified by
+                <a href="https://jan-osing.de" target="_blank">JanUwU42</a>
                 •
-                <a href="https://github.com/refact0r/re-start" target="_blank"
-                    >github</a
-                >
+                <a href="https://github.com/JanUwU42/re-start" target="_blank">source</a>
             </div>
         </div>
     </div>
@@ -270,7 +239,7 @@
         font-size: 1.5rem;
         font-weight: 300;
     }
-    .version {
+    .credits {
         color: var(--txt-3);
     }
 </style>

@@ -18,30 +18,24 @@ class WeatherAPI {
         longitude,
         tempUnit,
         speedUnit,
-        timeFormat = '12hr'
+        timeFormat = '24hr'
     ) {
         const rawData = await this._fetchWeatherData(
             latitude,
             longitude,
             tempUnit,
-            speedUnit
         )
         this._cacheWeather(rawData)
 
         return {
-            current: this._processCurrentWeather(rawData.current),
-            forecast: this._processHourlyForecast(
-                rawData.hourly,
-                rawData.current.time,
-                timeFormat
-            ),
+            current: this._processCurrentWeather(rawData.current)
         }
     }
 
     /**
      * Get cached weather data with staleness info
      */
-    getCachedWeather(timeFormat = '12hr') {
+    getCachedWeather(timeFormat = '24hr') {
         const cached = this._getCachedData()
 
         if (!cached.data) {
@@ -49,12 +43,7 @@ class WeatherAPI {
         }
 
         const processedData = {
-            current: this._processCurrentWeather(cached.data.current),
-            forecast: this._processHourlyForecast(
-                cached.data.hourly,
-                cached.data.current.time,
-                timeFormat
-            ),
+            current: this._processCurrentWeather(cached.data.current)
         }
 
         return {
@@ -96,19 +85,16 @@ class WeatherAPI {
     async _fetchWeatherData(
         latitude,
         longitude,
-        tempUnit = 'fahrenheit',
-        speedUnit = 'mph'
+        tempUnit = 'celsius',
     ) {
         const params = new URLSearchParams({
             latitude: latitude.toString(),
             longitude: longitude.toString(),
             hourly: 'temperature_2m,weather_code,is_day',
-            current:
-                'temperature_2m,weather_code,relative_humidity_2m,precipitation_probability,wind_speed_10m,apparent_temperature,is_day',
+            current: 'temperature_2m,weather_code,is_day',
             timezone: 'auto',
             forecast_hours: '24',
             temperature_unit: tempUnit,
-            wind_speed_unit: speedUnit,
         })
 
         const response = await fetch(`${this.baseUrl}?${params}`)
@@ -124,9 +110,6 @@ class WeatherAPI {
      */
     _processCurrentWeather(currentData) {
         currentData.temperature_2m = currentData.temperature_2m.toFixed(0)
-        currentData.wind_speed_10m = currentData.wind_speed_10m.toFixed(0)
-        currentData.apparent_temperature =
-            currentData.apparent_temperature.toFixed(0)
         return {
             ...currentData,
             description: this._getWeatherDescription(
@@ -134,48 +117,6 @@ class WeatherAPI {
                 currentData.is_day === 1
             ),
         }
-    }
-
-    /**
-     * Process hourly forecast to get every 3rd hour starting 3 hours from current hour
-     */
-    _processHourlyForecast(hourlyData, currentTime, timeFormat = '12hr') {
-        const currentHour = new Date(currentTime).getHours()
-        const forecasts = []
-
-        // Find the current hour in the forecast
-        let currentIndex = 0
-        for (let i = 0; i < hourlyData.time.length; i++) {
-            const forecastHour = new Date(hourlyData.time[i]).getHours()
-            if (forecastHour >= currentHour) {
-                currentIndex = i
-                break
-            }
-        }
-
-        // Get forecasts every 3 hours starting from 3 hours after current, up to 5 forecasts
-        for (
-            let i = 0;
-            i < 5 && currentIndex + (i + 1) * 3 < hourlyData.time.length;
-            i++
-        ) {
-            const index = currentIndex + (i + 1) * 3
-            forecasts.push({
-                time: hourlyData.time[index],
-                temperature: hourlyData.temperature_2m[index].toFixed(0),
-                weatherCode: hourlyData.weather_code[index],
-                description: this._getWeatherDescription(
-                    hourlyData.weather_code[index],
-                    hourlyData.is_day[index] === 1
-                ),
-                formattedTime: this._formatTime(
-                    hourlyData.time[index],
-                    timeFormat
-                ),
-            })
-        }
-
-        return forecasts
     }
 
     /**
@@ -192,7 +133,7 @@ class WeatherAPI {
     /**
      * Format time to display (e.g., "12pm" for 12hr, "12:00" for 24hr)
      */
-    _formatTime(timeString, timeFormat = '12hr') {
+    _formatTime(timeString, timeFormat = '12:00') {
         const date = new Date(timeString)
 
         if (timeFormat === '12hr') {

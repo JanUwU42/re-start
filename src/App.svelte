@@ -1,9 +1,7 @@
 <script>
-    import Todoist from './lib/components/Todoist.svelte'
     import Weather from './lib/components/Weather.svelte'
     import Links from './lib/components/Links.svelte'
     import Clock from './lib/components/Clock.svelte'
-    import Stats from './lib/components/Stats.svelte'
     import Settings from './lib/components/Settings.svelte'
     import '@fontsource-variable/geist-mono'
 
@@ -18,11 +16,10 @@
     <div class="container">
         <div class="top">
             <Clock />
-            <Stats />
+            <Weather />
         </div>
         <div class="widgets">
-            <Weather />
-            <Todoist />
+            
         </div>
         <Links />
     </div>

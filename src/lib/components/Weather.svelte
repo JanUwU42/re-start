@@ -4,7 +4,6 @@
     import { settings } from '../settings-store.svelte.js'
 
     let current = $state(null)
-    let forecast = $state([])
     let loading = $state(false)
     let error = $state(null)
     let initialLoad = $state(true)
@@ -63,7 +62,6 @@
             )
 
             current = data.current
-            forecast = data.forecast
         } catch (err) {
             error = 'failed to load weather'
             console.error(err)
@@ -97,84 +95,20 @@
     {:else if current}
         <div class="temp">{current.temperature_2m}°</div>
         <div class="description">{current.description}</div>
-        <br />
-        <div class="stats">
-            <div class="col">
-                <div>
-                    humi <span class="value"
-                        >{current.relative_humidity_2m}%</span
-                    >
-                </div>
-                <div>
-                    prec <span class="value"
-                        >{current.precipitation_probability}%</span
-                    >
-                </div>
-            </div>
-            <div class="col">
-                <div>
-                    wind <span class="value"
-                        >{current.wind_speed_10m} {settings.speedUnit}</span
-                    >
-                </div>
-                <div>
-                    feel <span class="value"
-                        >{current.apparent_temperature}°</span
-                    >
-                </div>
-            </div>
-        </div>
-        <br />
-        <div class="forecast">
-            <div class="col">
-                {#each forecast as forecast}
-                    <div class="forecast-time">{forecast.formattedTime}</div>
-                {/each}
-            </div>
-            <div class="col">
-                {#each forecast as forecast}
-                    <div class="forecast-temp">{forecast.temperature}°</div>
-                {/each}
-            </div>
-            <div class="col">
-                {#each forecast as forecast}
-                    <div class="forecast-weather">{forecast.description}</div>
-                {/each}
-            </div>
-        </div>
     {/if}
 </div>
 
 <style>
     .temp {
-        font-size: 2rem;
+        font-size: 3.125rem;
         font-weight: 300;
         color: var(--txt-1);
-        line-height: 2.625rem;
+        line-height: 3.5rem;
+        margin: 0 0 0.5rem 0;
     }
     .description {
-        font-size: 1.25rem;
+        font-size: 1.5rem;
         color: var(--txt-3);
-    }
-    .value {
-        color: var(--txt-1);
-    }
-    .stats {
-        display: flex;
-        gap: 1.5rem;
-    }
-    .forecast {
-        display: flex;
-        gap: 1.5rem;
-    }
-    .forecast-time {
-        text-align: end;
-    }
-    .forecast-temp {
-        text-align: end;
-        color: var(--txt-1);
-    }
-    .forecast-weather {
-        color: var(--txt-3);
+        line-height: 2rem;
     }
 </style>
