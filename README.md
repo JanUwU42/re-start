@@ -10,7 +10,7 @@ features:
 - customizable links
 - relatively lightweight (<90kb including fonts)
 
-<img width="2331" height="1319" alt="image" src="https://github.com/user-attachments/assets/e3164af7-fc42-4caf-81ee-a049e05b84c7" />
+![a picture of the startpage](image.png)
 
 ## installation
 
