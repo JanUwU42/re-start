@@ -10,7 +10,7 @@ features:
 - customizable links
 - relatively lightweight (<90kb including fonts)
 
-![a picture of the startpage](image.png)
+![a picture of the startpage](image-1.png)
 
 ## installation
 
