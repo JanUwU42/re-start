@@ -7,17 +7,16 @@ let defaultSettings = {
     links: [
         { title: 'mail', url: 'https://mail.proton.me/u/0/inbox' },
         { title: 'calendar', url: 'https://calendar.proton.me/u/0/' },
-        { title: 'simplelogin', url: 'https://app.simplelogin.io/dashboard/' },
         { title: 'github', url: 'https://github.com' },
         { title: 'protondb', url: 'https://www.protondb.com' },
-        { title: 'areweanticheatyet', url: 'https://areweanticheatyet.com/' },
+        { title: 'areweacyet', url: 'https://areweanticheatyet.com/' },
         { title: 'reddit', url: 'https://www.reddit.com/' },
         { title: 'lemmy', url: 'https://discuss.tchncs.de/' },
         { title: 'mastodon', url: 'https://sakurajima.moe/home' },
-        { title: 'simplelogin', url: 'https://anilist.co/user/JanUwU42/animelist' },
+        { title: 'anilist', url: 'https://anilist.co/' },
         { title: 'crunchyroll', url: 'https://www.crunchyroll.com/' },
         { title: 'twitch', url: 'https://www.twitch.tv/' },
-        { title: 'Trainex', url: 'https://www.trainex22.de/vwa-ms-trainex/login.cfm' },
+        { title: 'trainex', url: 'https://www.trainex22.de/vwa-ms-trainex/login.cfm' },
     ],
 }
 
