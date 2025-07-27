@@ -21,6 +21,7 @@ features:
 3. click the gear icon in the top right.
 4. click "Install Add-on From File" and select the .xpi file you downloaded.
 5. make sure to click "Add" and "Keep Changes".
+
 (I did not sign the xpi yet, so in order to use it you have to disable "xpinstall.signatures.required" in about:config)
 
 ### chrome
