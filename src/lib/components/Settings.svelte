@@ -211,7 +211,6 @@
         margin-bottom: 0.5rem;
     }
     .group input[type='text'],
-    .group input[type='password'],
     .group input[type='number'],
     .group input[type='url'] {
         width: 100%;

@@ -41,7 +41,6 @@
         const cached = weatherAPI.getCachedWeather(settings.timeFormat)
         if (cached.data) {
             current = cached.data.current
-            forecast = cached.data.forecast
 
             if (!cached.isStale) {
                 error = null
